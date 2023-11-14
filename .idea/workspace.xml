@@ -5,29 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbd309f0-7860-419e-bea9-a69d0c42a78c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Star.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/jbq061/assignment4/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Star.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Star.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +39,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2Y71Otq3EY9ReVqh1D45hg9Btkv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -71,10 +58,12 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -106,7 +95,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699861781481</updated>
-      <workItem from="1699861782552" duration="2098000" />
+      <workItem from="1699861782552" duration="2139000" />
+      <workItem from="1699906721593" duration="6553000" />
     </task>
     <servers />
   </component>

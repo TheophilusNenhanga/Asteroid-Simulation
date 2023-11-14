@@ -4,11 +4,11 @@ public class Asteroid {
 	private double radius;
 	private double[] coordinates;
 
-	public Asteroid(){
+	public Asteroid() {
 		coordinates = new double[2];
 	}
 
-	public Asteroid(double normalizedX, double normalizedY, double radius){
+	public Asteroid(double normalizedX, double normalizedY, double radius) {
 		this.coordinates = new double[]{normalizedX, normalizedY};
 		this.radius = radius;
 	}

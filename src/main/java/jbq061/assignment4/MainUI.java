@@ -8,9 +8,11 @@ public class MainUI extends StackPane {
 	public MainUI() {
 		PublishSubscribe publishSubscribe = new PublishSubscribe();
 		spaceView = new SpaceView(800);
-		SpaceModel spaceModel = new SpaceModel();
-		SpaceController spaceController = new SpaceController(publishSubscribe);
+		SpaceModel spaceModel = new SpaceModel(publishSubscribe);
+		SpaceController spaceController = new SpaceController();
 		IModel iModel = new IModel();
+
+		publishSubscribe.subscribe("create", spaceView);
 
 		// Linking
 		spaceView.setupEvents(spaceController);
@@ -18,10 +20,13 @@ public class MainUI extends StackPane {
 		spaceModel.addSubscriber(spaceView);
 		spaceController.setIModel(iModel);
 
+		spaceController.startSystem();
+
+
 		this.getChildren().add(spaceView);
 	}
 
-	public void setFocus(){
+	public void setFocus() {
 		spaceView.requestFocus();
 	}
 }
