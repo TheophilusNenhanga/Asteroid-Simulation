@@ -7,8 +7,11 @@ public class SpaceController {
 	private SpaceModel model;
 	private IModel iModel;
 
-	public SpaceController() {
-		random = new Random(346542131); // Adding a random seed - its random but fixed between executions.
+	private PublishSubscribe publishSubscribe;
+
+	public SpaceController(PublishSubscribe publishSubscribe) {
+		this.random = new Random(345654566); // Adding a random seed - its random but fixed between executions.
+		this.publishSubscribe = publishSubscribe;
 	}
 
 	public void setModel(SpaceModel model) {
@@ -20,14 +23,29 @@ public class SpaceController {
 	}
 
 	public void startSystem() {
-		// When the application starts:
 		// Make stars
-		for (int i = 0; i < 100; i++) {
-			model.createStar(random.nextDouble(1), random.nextDouble(1), 5);
+		for (int i = 0; i < 400; i++) {
+			model.createStar(random.nextDouble(1), random.nextDouble(1), 2.5);
 		}
 		// Make Asteroids
 		for (int i = 0; i < 10; i++) {
-			model.createAsteroid(random.nextDouble(1), random.nextDouble(1), random.nextInt(20, 60));
+			model.createAsteroid(random.nextDouble(1), random.nextDouble(1));
 		}
+	}
+
+	public void handleTimerTick() {
+		iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
+		if (iModel.getWorldRotation() >= 360) iModel.setWorldRotation(0);
+
+		for (Asteroid asteroid : model.getAsteroids()) {
+			asteroid.getCoordinates()[0] += asteroid.getXVelocity();
+			if (asteroid.getCoordinates()[0] > 1) asteroid.getCoordinates()[0] = 0;
+
+			asteroid.getCoordinates()[1] += asteroid.getYVelocity();
+			if (asteroid.getCoordinates()[1] > 1) asteroid.getCoordinates()[1] = 0;
+
+			asteroid.setAngle(asteroid.getAngle() + asteroid.getAVelocity());
+		}
+		publishSubscribe.publish("animate", model.getAsteroids(), model.getStars(), iModel.getWorldRotation());
 	}
 }

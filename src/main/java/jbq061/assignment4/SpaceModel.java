@@ -19,13 +19,21 @@ public class SpaceModel {
 		subscribers.add(sub);
 	}
 
-	public void createAsteroid(double normalizedX, double normalizedY, double radius) {
-		asteroids.add(new Asteroid(normalizedX, normalizedY, radius));
-		publishSubscribe.publish("create", this.asteroids, this.stars);
+	public void createAsteroid(double normalizedX, double normalizedY) {
+		asteroids.add(new Asteroid(normalizedX, normalizedY));
+		publishSubscribe.publish("create", this.asteroids, this.stars, 0);
 	}
 
 	public void createStar(double normalizedX, double normalizedY, double radius) {
 		stars.add(new Star(normalizedX, normalizedY, radius));
-		publishSubscribe.publish("create", this.asteroids, this.stars);
+		publishSubscribe.publish("create", this.asteroids, this.stars, 0);
+	}
+
+	public ArrayList<Asteroid> getAsteroids() {
+		return asteroids;
+	}
+
+	public ArrayList<Star> getStars() {
+		return stars;
 	}
 }

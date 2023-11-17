@@ -40,9 +40,9 @@ public class PublishSubscribe {
 	 * @param asteroids   The changed asteroids
 	 * @param stars       The changed stars
 	 */
-	public void publish(String channelName, List<Asteroid> asteroids, List<Star> stars) {
+	public void publish(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
 		if (channels.containsKey(channelName)) {
-			channels.get(channelName).forEach(subscriber -> subscriber.receiveNotification(channelName, asteroids, stars));
+			channels.get(channelName).forEach(subscriber -> subscriber.receiveNotification(channelName, asteroids, stars, worldRotation));
 		}
 	}
 }

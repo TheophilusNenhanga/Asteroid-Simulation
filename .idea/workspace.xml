@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbd309f0-7860-419e-bea9-a69d0c42a78c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Star.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Star.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,23 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SpaceApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="jbq061.assignment4.SpaceApp" />
@@ -97,6 +97,11 @@
       <updated>1699861781481</updated>
       <workItem from="1699861782552" duration="2139000" />
       <workItem from="1699906721593" duration="6553000" />
+      <workItem from="1699981179577" duration="1374000" />
+      <workItem from="1700029259020" duration="4387000" />
+      <workItem from="1700073678332" duration="2182000" />
+      <workItem from="1700084959134" duration="2323000" />
+      <workItem from="1700206393933" duration="4768000" />
     </task>
     <servers />
   </component>

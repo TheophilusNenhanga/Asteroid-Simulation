@@ -22,23 +22,41 @@ public class SpaceView extends StackPane implements Subscriber {
 	public void setupEvents(SpaceController controller) {
 	}
 
-	public void draw(List<Asteroid> asteroids, List<Star> stars) {
+	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		graphicsContext.setFill(Color.GRAY);
-		for (Asteroid asteroid : asteroids) {
-			graphicsContext.fillOval(asteroid.getCoordinates()[0] * canvas.getWidth(), asteroid.getCoordinates()[1] * canvas.getHeight(), asteroid.getRadius(), asteroid.getRadius());
-		}
+
 		graphicsContext.setFill(Color.WHITE);
 		for (Star star : stars) {
-			graphicsContext.fillOval(star.getCoordinates()[0] * canvas.getWidth(), star.getCoordinates()[1] * canvas.getHeight(), star.getRadius(), star.getRadius());
+			double[] coordinates = star.getCoordinates();
+			graphicsContext.fillOval(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight(), star.getRadius(), star.getRadius());
 		}
+
+		graphicsContext.setFill(Color.GRAY);
+		for (Asteroid asteroid : asteroids) {
+			double[] coordinates = asteroid.getCoordinates();
+			double[] xPoints = asteroid.getXPoints();
+			double[] yPoints = asteroid.getYPoints();
+
+			graphicsContext.save();
+
+			graphicsContext.translate(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight());
+			graphicsContext.scale(canvas.getWidth(), canvas.getHeight());
+			graphicsContext.rotate(asteroid.getAngle());
+			graphicsContext.fillPolygon(xPoints, yPoints, 8);
+
+			graphicsContext.restore();
+		}
+		// graphicsContext.rotate(worldRotation);
 	}
 
 
 	@Override
-	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars) {
+	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
 		if (channelName.equals("create")) {
-			draw(asteroids, stars);
+			draw(asteroids, stars,worldRotation);
+		}
+		if (channelName.equals("animate")) {
+			draw(asteroids, stars, worldRotation);
 		}
 	}
 }
