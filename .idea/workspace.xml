@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbd309f0-7860-419e-bea9-a69d0c42a78c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SidePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -101,7 +99,11 @@
       <workItem from="1700029259020" duration="4387000" />
       <workItem from="1700073678332" duration="2182000" />
       <workItem from="1700084959134" duration="2323000" />
-      <workItem from="1700206393933" duration="4768000" />
+      <workItem from="1700206393933" duration="5035000" />
+      <workItem from="1700261244376" duration="2722000" />
+      <workItem from="1700508542063" duration="1770000" />
+      <workItem from="1700538435788" duration="1282000" />
+      <workItem from="1701280105226" duration="7225000" />
     </task>
     <servers />
   </component>

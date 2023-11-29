@@ -24,8 +24,8 @@ public class SpaceController {
 
 	public void startSystem() {
 		// Make stars
-		for (int i = 0; i < 400; i++) {
-			model.createStar(random.nextDouble(1), random.nextDouble(1), 2.5);
+		for (int i = 0; i < 200; i++) {
+			model.createStar(random.nextDouble(1), random.nextDouble(1), 1);
 		}
 		// Make Asteroids
 		for (int i = 0; i < 10; i++) {
@@ -33,19 +33,30 @@ public class SpaceController {
 		}
 	}
 
+	public void moveAsteroids(Asteroid asteroid){
+		asteroid.getCoordinates()[0] += asteroid.getXVelocity();
+		if (asteroid.getCoordinates()[0] > 1) asteroid.getCoordinates()[0] = 0;
+
+		asteroid.getCoordinates()[1] += asteroid.getYVelocity();
+		if (asteroid.getCoordinates()[1] > 1) asteroid.getCoordinates()[1] = 0;
+
+	}
+
+	public void spinAsteroids(Asteroid asteroid){
+		asteroid.setAngle(asteroid.getAngle() + asteroid.getAVelocity());
+	}
+
 	public void handleTimerTick() {
-		iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
-		if (iModel.getWorldRotation() >= 360) iModel.setWorldRotation(0);
+		// iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
+		iModel.setWorldRotation(iModel.getWorldRotationVelocity());
+		// if (iModel.getWorldRotation() >= 0.2) iModel.setWorldRotation(0.1);
+		// When the world gets back to its original position rest the world rotation.
 
 		for (Asteroid asteroid : model.getAsteroids()) {
-			asteroid.getCoordinates()[0] += asteroid.getXVelocity();
-			if (asteroid.getCoordinates()[0] > 1) asteroid.getCoordinates()[0] = 0;
-
-			asteroid.getCoordinates()[1] += asteroid.getYVelocity();
-			if (asteroid.getCoordinates()[1] > 1) asteroid.getCoordinates()[1] = 0;
-
-			asteroid.setAngle(asteroid.getAngle() + asteroid.getAVelocity());
+			moveAsteroids(asteroid);
+			spinAsteroids(asteroid);
 		}
+		// System.out.println("World rotation: " + iModel.getWorldRotation() + "World Rotation Velocity: " + iModel.getWorldRotationVelocity());
 		publishSubscribe.publish("animate", model.getAsteroids(), model.getStars(), iModel.getWorldRotation());
 	}
 }

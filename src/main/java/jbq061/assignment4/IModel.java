@@ -6,7 +6,7 @@ public class IModel {
 
 	public IModel(){
 		worldRotation = 0;
-		worldRotationVelocity = 0.0001;
+		worldRotationVelocity = 0.1;
 	}
 
 	public double getWorldRotation() {
