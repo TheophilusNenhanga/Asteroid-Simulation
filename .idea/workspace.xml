@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbd309f0-7860-419e-bea9-a69d0c42a78c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SidePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +56,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -104,6 +105,11 @@
       <workItem from="1700508542063" duration="1770000" />
       <workItem from="1700538435788" duration="1282000" />
       <workItem from="1701280105226" duration="7225000" />
+      <workItem from="1701293949561" duration="2570000" />
+      <workItem from="1701373358212" duration="515000" />
+      <workItem from="1701376136698" duration="222000" />
+      <workItem from="1701415985208" duration="3333000" />
+      <workItem from="1701582019865" duration="6821000" />
     </task>
     <servers />
   </component>

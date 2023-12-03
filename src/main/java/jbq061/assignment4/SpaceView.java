@@ -2,6 +2,7 @@ package jbq061.assignment4;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -23,10 +24,12 @@ public class SpaceView extends StackPane implements Subscriber {
 	}
 
 	public void setupEvents(SpaceController controller) {
+		this.setOnMouseMoved(controller::handleMouseMoved);
 	}
 
 	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
 
 		{
 			// translate and rotate before asteroids are drawn
@@ -64,11 +67,23 @@ public class SpaceView extends StackPane implements Subscriber {
 			}
 			graphicsContext.restore();
 		}
+
+
 	}
 
 	@Override
 	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars,
 			double worldRotation) {
+		if (channelName.equals("create")) {
+			draw(asteroids, stars, worldRotation);
+		}
+		if (channelName.equals("animate")) {
+			draw(asteroids, stars, worldRotation);
+		}
+	}
+
+	@Override
+	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation, MouseEvent event) {
 		if (channelName.equals("create")) {
 			draw(asteroids, stars, worldRotation);
 		}

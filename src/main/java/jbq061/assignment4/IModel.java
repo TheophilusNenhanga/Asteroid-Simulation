@@ -6,7 +6,7 @@ public class IModel {
 
 	public IModel(){
 		worldRotation = 0;
-		worldRotationVelocity = 0.1;
+		worldRotationVelocity = 0.5;
 	}
 
 	public double getWorldRotation() {
@@ -18,5 +18,9 @@ public class IModel {
 	}
 	public double getWorldRotationVelocity() {
 		return worldRotationVelocity;
+	}
+
+	public void setWorldRotationVelocity(double worldRotationVelocity) {
+		this.worldRotationVelocity = worldRotationVelocity;
 	}
 }

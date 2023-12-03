@@ -1,5 +1,7 @@
 package jbq061.assignment4;
 
+import javafx.scene.input.MouseEvent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,12 @@ public class PublishSubscribe {
 	public void publish(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
 		if (channels.containsKey(channelName)) {
 			channels.get(channelName).forEach(subscriber -> subscriber.receiveNotification(channelName, asteroids, stars, worldRotation));
+		}
+	}
+
+	public void publish(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation, MouseEvent event) {
+		if (channels.containsKey(channelName)) {
+			channels.get(channelName).forEach(subscriber -> subscriber.receiveNotification(channelName, asteroids, stars, worldRotation, event));
 		}
 	}
 }
