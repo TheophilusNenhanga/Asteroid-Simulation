@@ -20,7 +20,7 @@ public class SpaceModel {
 	}
 
 	public void createAsteroid(double normalizedX, double normalizedY) {
-		asteroids.add(new Asteroid(normalizedX, normalizedY));
+		asteroids.add(new Asteroid(normalizedX, normalizedY, MainUI.spaceCanvasWidth, MainUI.spaceCanvasWidth));
 		publishSubscribe.publish("create", this.asteroids, this.stars, 0);
 	}
 

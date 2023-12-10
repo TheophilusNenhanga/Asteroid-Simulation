@@ -16,7 +16,7 @@ public class SpaceView extends StackPane implements Subscriber {
 	GraphicsContext graphicsContext;
 
 	public SpaceView(double normalizedX, double normalizedY, double canvasWidth) {
-		this.coordinates = new double[] { normalizedX, normalizedY };
+		this.coordinates = new double[]{normalizedX, normalizedY};
 		this.canvas = new Canvas(canvasWidth, canvasWidth);
 		graphicsContext = canvas.getGraphicsContext2D();
 		this.setStyle("-fx-background-color: black; -fx-border-color: #565656");
@@ -25,6 +25,9 @@ public class SpaceView extends StackPane implements Subscriber {
 
 	public void setupEvents(SpaceController controller) {
 		this.setOnMouseMoved(controller::handleMouseMoved);
+		this.setOnMousePressed(controller::handleMousePressed);
+		this.setOnMouseDragged(controller::handleMouseDragged);
+		this.setOnMouseReleased(controller::handleMouseReleased);
 	}
 
 	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
@@ -37,7 +40,7 @@ public class SpaceView extends StackPane implements Subscriber {
 			graphicsContext.translate(canvas.getWidth() / 2, canvas.getHeight() / 2); // Translate to teh centre of the screen
 			graphicsContext.rotate(worldRotation);
 			graphicsContext.translate(-canvas.getWidth() / 2, -canvas.getHeight() / 2); // Translate back to the origin point
-		};
+		}
 
 
 		{
@@ -52,28 +55,35 @@ public class SpaceView extends StackPane implements Subscriber {
 			graphicsContext.restore();
 		}
 
-		graphicsContext.setFill(Color.GRAY);
+
 		for (Asteroid asteroid : asteroids) {
 			double[] coordinates = asteroid.getCoordinates();
 			double[] xPoints = asteroid.getXPoints();
 			double[] yPoints = asteroid.getYPoints();
 
+			// Draw white outline
 			graphicsContext.save();
-			{
-				graphicsContext.translate(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight());
-				graphicsContext.scale(canvas.getWidth(), canvas.getHeight());
-				graphicsContext.rotate(asteroid.getAngle());
-				graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
-			}
+			graphicsContext.setFill(Color.WHITE);
+			graphicsContext.translate(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight());
+			graphicsContext.scale(canvas.getWidth() + 25, canvas.getHeight() + 25);
+			graphicsContext.rotate(asteroid.getAngle());
+			graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
+			graphicsContext.restore();
+
+			// Draw the actual asteroid
+			graphicsContext.save();
+			graphicsContext.setFill(asteroid.isSelected() ? Color.YELLOW : Color.GRAY);
+			graphicsContext.translate(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight());
+			graphicsContext.scale(canvas.getWidth(), canvas.getHeight());
+			graphicsContext.rotate(asteroid.getAngle());
+			graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
 			graphicsContext.restore();
 		}
-
-
 	}
 
 	@Override
 	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars,
-			double worldRotation) {
+	                                double worldRotation) {
 		if (channelName.equals("create")) {
 			draw(asteroids, stars, worldRotation);
 		}

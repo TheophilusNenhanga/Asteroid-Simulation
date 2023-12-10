@@ -2,6 +2,8 @@ package jbq061.assignment4;
 
 import javafx.scene.input.MouseEvent;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class SpaceController {
@@ -74,6 +76,39 @@ public class SpaceController {
 		this.lastEvent = event;
 	}
 
+	public void handleMousePressed(MouseEvent event) {
+
+		double mouseX = event.getX();
+		double mouseY = event.getY();
+
+		// Transform mouse location based on the world rotation
+		double rotatedMouseX = rotateX(mouseX, mouseY, -iModel.getWorldRotation());
+		double rotatedMouseY = rotateY(mouseX, mouseY, -iModel.getWorldRotation());
+
+		System.out.println("unrotated: " + mouseX + " " + mouseY);
+		System.out.println("rotated: " + rotatedMouseX + " " + rotatedMouseY);
+		System.out.println(iModel.getWorldRotation());
+
+		model.getAsteroids().forEach(asteroid -> {
+			if (asteroid.contains(event.getX(), event.getY())) {
+			//if (asteroid.contains(rotatedMouseX, rotatedMouseY)) { // regardless of whether I use the rotated or un-rotated values the selection is still incorrect.
+				asteroid.setSelected(true);
+				asteroid.setzOrder(asteroid.getzOrder() + 1);
+				if (!(iModel.getSelected().contains(asteroid))) iModel.getSelected().add(asteroid);
+
+			}
+		});
+		model.getAsteroids().sort(Comparator.comparingInt(Asteroid::getzOrder));
+	}
+
+	public void handleMouseDragged(MouseEvent event) {
+
+	}
+
+	public void handleMouseReleased(MouseEvent event) {
+
+	}
+
 	public void changeRotationVelocity(double rotationVelocity) {
 		this.iModel.setWorldRotationVelocity(rotationVelocity);
 	}
@@ -85,4 +120,15 @@ public class SpaceController {
 	public void toggleAsteroidRotation() {
 		asteroidRotation = !asteroidRotation;
 	}
+
+	private double rotateX(double x, double y, double radians) {
+		return Math.cos(radians) * x - Math.sin(radians) * y;
+	}
+
+	private double rotateY(double x, double y, double radians) {
+		return Math.sin(radians) * x + Math.cos(radians) * y;
+	}
 }
+
+// what if there was one invisible view that all asteroids would share. That view would be updated at the same time as the visible view.
+//This view would be used to check mouse presses

@@ -1,5 +1,11 @@
 package jbq061.assignment4;
 
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+
 import java.util.Random;
 
 public class Asteroid {
@@ -8,12 +14,17 @@ public class Asteroid {
 	private final double yVelocity;
 	private final double aVelocity;
 	private double angle;
-	private double[] xPoints;
-	private double[] yPoints;
+	private final double[] xPoints;
+	private final double[] yPoints;
+	private boolean selected;
 
 	Random random = new Random();
+	double canvasWidth, canvasHeight;
+	PixelReader pixelReader;
+	Canvas canvas;
+	private int zOrder;
 
-	public Asteroid(double normalizedX, double normalizedY) {
+	public Asteroid(double normalizedX, double normalizedY, double canvasWidth, double canvasHeight) {
 		this.coordinates = new double[]{normalizedX, normalizedY};
 		this.xPoints = generateAsteroidPoints()[0];
 		this.yPoints = generateAsteroidPoints()[1];
@@ -21,6 +32,21 @@ public class Asteroid {
 		this.xVelocity = random.nextDouble(0.001);
 		this.yVelocity = random.nextDouble(0.001);
 		this.aVelocity = random.nextDouble(1.8);
+		this.canvasWidth = canvasWidth;
+		this.canvasHeight = canvasHeight;
+		this.selected = false;
+		this.zOrder = 0;
+
+		canvas = new Canvas(canvasWidth, canvasHeight);
+		GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		graphicsContext.setFill(Color.BLACK);
+		graphicsContext.translate(coordinates[0] * canvas.getWidth(), coordinates[1] * canvas.getHeight());
+		graphicsContext.scale(canvas.getWidth(), canvas.getHeight());
+		graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
+		WritableImage snapshot = canvas.snapshot(null, new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight()));
+		pixelReader = snapshot.getPixelReader();
 	}
 
 	public double[] getCoordinates() {
@@ -70,11 +96,36 @@ public class Asteroid {
 		return yVelocity;
 	}
 
-	public double getAVelocity(){
+	public double getAVelocity() {
 		return aVelocity;
 	}
 
 	public void setAngle(double newAngle) {
 		this.angle = newAngle;
+	}
+
+	public boolean contains(double mouseX, double mouseY) {
+		int px = (int) mouseX;
+		int py = (int) mouseY;
+		if (px >= 0 && px < canvas.getWidth() && py >= 0 && py < canvas.getHeight()) {
+			return pixelReader.getColor(px, py).equals(Color.BLACK);
+		}
+		return false;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public int getzOrder() {
+		return zOrder;
+	}
+
+	public void setzOrder(int zOrder) {
+		this.zOrder = zOrder;
 	}
 }

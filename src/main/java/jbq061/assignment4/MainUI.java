@@ -6,10 +6,12 @@ import javafx.scene.layout.HBox;
 public class MainUI extends HBox {
 	private final SpaceView spaceView;
 
+	public static double spaceCanvasWidth = 800;
+
 	public MainUI(){
 
 		PublishSubscribe publishSubscribe = new PublishSubscribe();
-		spaceView = new SpaceView(0.5, 0.5, 800);
+		spaceView = new SpaceView(0.5, 0.5, spaceCanvasWidth);
 		SpaceModel spaceModel = new SpaceModel(publishSubscribe);
 		SpaceController spaceController = new SpaceController(publishSubscribe);
 		IModel iModel = new IModel();

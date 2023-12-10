@@ -31,7 +31,7 @@ public class CursorView extends StackPane implements Subscriber {
 
 	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation, MouseEvent event){
 		// only draw what is around the mouse event 20px radius.
-		System.out.println("Mouse Moved at X: " + event.getX() +" Y: "+ event.getY());
+		//System.out.println("Mouse Moved at X: " + event.getX() +" Y: "+ event.getY());
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 		double translateX = (canvas.getWidth() / 2) - (event.getX() / 2);
