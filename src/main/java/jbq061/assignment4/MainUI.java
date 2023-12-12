@@ -24,6 +24,12 @@ public class MainUI extends HBox {
 		publishSubscribe.subscribe("create", sidePanelSpaceView);
 		publishSubscribe.subscribe("animate", sidePanelSpaceView);
 
+		publishSubscribe.subscribe("areaCursor", spaceView);
+		publishSubscribe.subscribe("areaCursor", sidePanelSpaceView);
+
+		publishSubscribe.subscribe("areaCursor-off", spaceView);
+		publishSubscribe.subscribe("areaCursor-off", sidePanelSpaceView);
+
 		publishSubscribe.subscribe("show", cursorView);
 
 		// Linking

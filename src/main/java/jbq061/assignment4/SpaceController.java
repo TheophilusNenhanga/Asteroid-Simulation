@@ -1,8 +1,8 @@
 package jbq061.assignment4;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -12,11 +12,13 @@ public class SpaceController {
 	private IModel iModel;
 
 	private PublishSubscribe publishSubscribe;
-	private MouseEvent lastEvent;
+	private MouseEvent lastMouseEvent;
+	private ScrollEvent lastScrollEvent;
 	boolean asteroidMovement, asteroidRotation;
 
 	public SpaceController(PublishSubscribe publishSubscribe) {
 		this.random = new Random(345654566); // Adding a random seed - its random but fixed between executions.
+		//old random seed :
 		this.publishSubscribe = publishSubscribe;
 		asteroidRotation = true;
 		asteroidMovement = true;
@@ -55,28 +57,35 @@ public class SpaceController {
 	}
 
 	public void handleTimerTick() {
-		// iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
-		iModel.setWorldRotation(iModel.getWorldRotationVelocity());
-		// if (iModel.getWorldRotation() >= 0.2) iModel.setWorldRotation(0.1);
+
+		iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
+		if (iModel.getWorldRotation() >= 2*Math.PI) iModel.setWorldRotation(0);
 		// When the world gets back to its original position rest the world rotation.
 
 		for (Asteroid asteroid : model.getAsteroids()) {
-			if (asteroidMovement) moveAsteroids(asteroid);
-
-			if (asteroidRotation) spinAsteroids(asteroid);
+			if (asteroidMovement) if (!asteroid.isSelected()) moveAsteroids(asteroid);
+			if (asteroidRotation) if (!asteroid.isSelected()) spinAsteroids(asteroid);
 		}
 		// System.out.println("World rotation: " + iModel.getWorldRotation() + "World Rotation Velocity: " + iModel.getWorldRotationVelocity());
-		publishSubscribe.publish("animate", model.getAsteroids(), model.getStars(), iModel.getWorldRotation());
-		if (lastEvent != null)
-			publishSubscribe.publish("show", model.getAsteroids(), model.getStars(), iModel.getWorldRotation(), lastEvent);
+
+		if (iModel.isAreaCursorOn()){
+			publishSubscribe.publish("areaCursor", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), lastScrollEvent, iModel.getCurrentAreaCursor());
+		}else{
+			publishSubscribe.publish("animate", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity());
+		}
+
+
+		if (lastMouseEvent != null)
+			publishSubscribe.publish("show", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), lastMouseEvent);
 	}
 
 	public void handleMouseMoved(MouseEvent event) {
-		publishSubscribe.publish("show", model.getAsteroids(), model.getStars(), iModel.getWorldRotation(), event);
-		this.lastEvent = event;
+		publishSubscribe.publish("show", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), event);
+		this.lastMouseEvent = event;
 	}
 
 	public void handleMousePressed(MouseEvent event) {
+		iModel.setAreaCursorOn(true);
 
 		double mouseX = event.getX();
 		double mouseY = event.getY();
@@ -90,7 +99,7 @@ public class SpaceController {
 		System.out.println(iModel.getWorldRotation());
 
 		model.getAsteroids().forEach(asteroid -> {
-			if (asteroid.contains(event.getX(), event.getY())) {
+			if (asteroid.contains(mouseX, mouseY)) {
 			//if (asteroid.contains(rotatedMouseX, rotatedMouseY)) { // regardless of whether I use the rotated or un-rotated values the selection is still incorrect.
 				asteroid.setSelected(true);
 				asteroid.setzOrder(asteroid.getzOrder() + 1);
@@ -106,7 +115,21 @@ public class SpaceController {
 	}
 
 	public void handleMouseReleased(MouseEvent event) {
+		// clear the selection when the mouse is released
+		publishSubscribe.publish("areaCursor-off");
+		iModel.setAreaCursorOn(false);
+		iModel.clearSelection();
 
+	}
+
+	public void handleWheel(ScrollEvent event){
+		if (iModel.isAreaCursorOn()){
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			lastScrollEvent = event;
+			iModel.setCurrentAreaCursor(Math.min(Math.max(iModel.getCurrentAreaCursor() + event.getDeltaY(), iModel.getAreaCursorMin()), iModel.getAreaCursorMax()));
+			publishSubscribe.publish("areaCursor", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), event, iModel.getCurrentAreaCursor());
+		}
+		// Do nothing if the user has not clicked the canvas first
 	}
 
 	public void changeRotationVelocity(double rotationVelocity) {
@@ -122,11 +145,12 @@ public class SpaceController {
 	}
 
 	private double rotateX(double x, double y, double radians) {
-		return Math.cos(radians) * x - Math.sin(radians) * y;
+		return (Math.cos(radians) * x - Math.sin(radians) * y);
+
 	}
 
 	private double rotateY(double x, double y, double radians) {
-		return Math.sin(radians) * x + Math.cos(radians) * y;
+		return (Math.sin(radians) * x + Math.cos(radians) * y);
 	}
 }
 

@@ -17,7 +17,7 @@ public class ControlPanelView extends VBox {
 	public ControlPanelView() {
 		Label label = new Label("Rotation Speed");
 		label.setTextFill(Color.WHITE);
-		slider = new Slider(0, 1, 0.5);
+		slider = new Slider(0, 0.15 * Math.PI, 0.075 * Math.PI);
 		asteroidMovement = new CheckBox("Asteroid Movement");
 		asteroidMovement.setSelected(true);
 		asteroidMovement.setTextFill(Color.WHITE);

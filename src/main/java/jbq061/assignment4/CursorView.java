@@ -2,6 +2,7 @@ package jbq061.assignment4;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -27,6 +28,16 @@ public class CursorView extends StackPane implements Subscriber {
 		if (channelName.equals("show")){
 			draw(asteroids, stars, worldRotation, event);
 		}
+	}
+
+	@Override
+	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation, InputEvent event, double areaCursorRadius) {
+		// The cursor view does not show the area cursor
+	}
+
+	@Override
+	public void receiveNotification(String channelName) {
+
 	}
 
 	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation, MouseEvent event){

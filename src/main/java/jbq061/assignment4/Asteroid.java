@@ -53,11 +53,6 @@ public class Asteroid {
 		return coordinates;
 	}
 
-	public void setCoordinates(double[] coordinates) {
-		this.coordinates = coordinates;
-	}
-
-
 	private double[][] generateAsteroidPoints() {
 		double[][] points = new double[2][8];
 		double[] xPoints = new double[8];

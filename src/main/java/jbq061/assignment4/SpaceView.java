@@ -2,10 +2,13 @@ package jbq061.assignment4;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpaceView extends StackPane implements Subscriber {
@@ -14,6 +17,8 @@ public class SpaceView extends StackPane implements Subscriber {
 
 	Canvas canvas;
 	GraphicsContext graphicsContext;
+
+	private boolean areaCursor;
 
 	public SpaceView(double normalizedX, double normalizedY, double canvasWidth) {
 		this.coordinates = new double[]{normalizedX, normalizedY};
@@ -28,9 +33,10 @@ public class SpaceView extends StackPane implements Subscriber {
 		this.setOnMousePressed(controller::handleMousePressed);
 		this.setOnMouseDragged(controller::handleMouseDragged);
 		this.setOnMouseReleased(controller::handleMouseReleased);
+		this.setOnScroll(controller::handleWheel);
 	}
 
-	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotation) {
+	public void draw(List<Asteroid> asteroids, List<Star> stars, double worldRotationVelocity, double[] areaCursorDimensions) {
 		graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 
@@ -38,10 +44,9 @@ public class SpaceView extends StackPane implements Subscriber {
 			// translate and rotate before asteroids are drawn
 			// Rotate the world
 			graphicsContext.translate(canvas.getWidth() / 2, canvas.getHeight() / 2); // Translate to teh centre of the screen
-			graphicsContext.rotate(worldRotation);
+			graphicsContext.rotate(worldRotationVelocity);
 			graphicsContext.translate(-canvas.getWidth() / 2, -canvas.getHeight() / 2); // Translate back to the origin point
 		}
-
 
 		{
 			graphicsContext.save();
@@ -54,7 +59,6 @@ public class SpaceView extends StackPane implements Subscriber {
 			}
 			graphicsContext.restore();
 		}
-
 
 		for (Asteroid asteroid : asteroids) {
 			double[] coordinates = asteroid.getCoordinates();
@@ -79,26 +83,62 @@ public class SpaceView extends StackPane implements Subscriber {
 			graphicsContext.fillPolygon(xPoints, yPoints, xPoints.length);
 			graphicsContext.restore();
 		}
+
+		if (areaCursor && areaCursorDimensions == null) throw new RuntimeException("area cursor dimensions expected");
+		if (areaCursor) {
+			{
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+				System.out.println(Arrays.toString(areaCursorDimensions));
+				graphicsContext.setFill(Color.rgb(50, 50, 50, 0.5));
+				graphicsContext.fillOval(areaCursorDimensions[0], areaCursorDimensions[1], areaCursorDimensions[2], areaCursorDimensions[2]);
+			}
+		}
 	}
 
 	@Override
 	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars,
 	                                double worldRotation) {
 		if (channelName.equals("create")) {
-			draw(asteroids, stars, worldRotation);
+			draw(asteroids, stars, worldRotation, null);
 		}
 		if (channelName.equals("animate")) {
-			draw(asteroids, stars, worldRotation);
+			draw(asteroids, stars, worldRotation, null);
 		}
 	}
 
 	@Override
 	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation, MouseEvent event) {
 		if (channelName.equals("create")) {
-			draw(asteroids, stars, worldRotation);
+			draw(asteroids, stars, worldRotation, null);
 		}
 		if (channelName.equals("animate")) {
-			draw(asteroids, stars, worldRotation);
+			draw(asteroids, stars, worldRotation, null);
+		}
+	}
+
+	@Override
+	public void receiveNotification(String channelName, List<Asteroid> asteroids, List<Star> stars, double worldRotation, InputEvent event, double areaCursorRadius) {
+
+		if (event instanceof MouseEvent) {
+			if (channelName.equals("areaCursor")) {
+				double[] areaCursorDims = new double[]{((MouseEvent) event).getX(), ((MouseEvent) event).getY(), areaCursorRadius};
+				draw(asteroids, stars, worldRotation, areaCursorDims);
+				this.areaCursor = true;
+			}
+		}
+		if (event instanceof ScrollEvent) {
+			if (channelName.equals("areaCursor")) {
+				double[] areaCursorDims = new double[]{((ScrollEvent) event).getX(), ((ScrollEvent) event).getY(), areaCursorRadius};
+				draw(asteroids, stars, worldRotation, areaCursorDims);
+				this.areaCursor = true;
+			}
+		}
+	}
+
+	@Override
+	public void receiveNotification(String channelName) {
+		if (channelName.equals("areaCursor-off")) {
+			this.areaCursor = false;
 		}
 	}
 }

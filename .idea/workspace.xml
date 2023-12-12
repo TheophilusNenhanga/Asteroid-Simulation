@@ -7,12 +7,14 @@
     <list default="true" id="dbd309f0-7860-419e-bea9-a69d0c42a78c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Asteroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/ControlPanelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/CursorView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/IModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/MainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/PublishSubscribe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jbq061/assignment4/Subscriber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +39,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2Y71Otq3EY9ReVqh1D45hg9Btkv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -113,7 +115,10 @@
       <workItem from="1701807365158" duration="225000" />
       <workItem from="1701825214520" duration="8428000" />
       <workItem from="1702063148817" duration="618000" />
-      <workItem from="1702150551927" duration="14972000" />
+      <workItem from="1702150551927" duration="15056000" />
+      <workItem from="1702253289397" duration="2545000" />
+      <workItem from="1702404640886" duration="11277000" />
+      <workItem from="1702422698600" duration="357000" />
     </task>
     <servers />
   </component>
@@ -133,5 +138,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/jbq061/assignment4/SpaceController.java</url>
+          <line>124</line>
+          <properties class="jbq061.assignment4.SpaceController" method="handleWheel">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
