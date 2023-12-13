@@ -1,9 +1,9 @@
 package jbq061.assignment4;
 
 public class Star {
-	private double[] coordinates;
+	private final double[] coordinates;
 
-	private double radius;
+	private final double radius;
 
 	public Star(double normalizedX, double normalizedY, double radius) {
 		coordinates = new double[]{normalizedX, normalizedY};
@@ -12,10 +12,6 @@ public class Star {
 
 	public double[] getCoordinates() {
 		return coordinates;
-	}
-
-	public void setCoordinates(double[] coordinates) {
-		this.coordinates = coordinates;
 	}
 
 	public double getRadius() {

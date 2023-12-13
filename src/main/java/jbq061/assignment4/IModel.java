@@ -6,8 +6,7 @@ import java.util.List;
 public class IModel {
 	private double worldRotation;
 	private double worldRotationVelocity;
-
-	private List<Asteroid> selected;
+	private final List<Asteroid> selected;
 	private final double areaCursorMin;
 	private final double areaCursorMax;
 	private double currentAreaCursor;
@@ -68,10 +67,8 @@ public class IModel {
 		return selected;
 	}
 
-	public void clearSelection(){
-		this.selected.forEach((asteroid -> {
-			asteroid.setSelected(false);
-		}));
+	public void clearSelection() {
+		this.selected.forEach((asteroid -> asteroid.setSelected(false)));
 		this.selected.clear();
 	}
 }

@@ -8,7 +8,7 @@ public class MainUI extends HBox {
 
 	public static double spaceCanvasWidth = 800;
 
-	public MainUI(){
+	public MainUI() {
 
 		PublishSubscribe publishSubscribe = new PublishSubscribe();
 		spaceView = new SpaceView(0.5, 0.5, spaceCanvasWidth);

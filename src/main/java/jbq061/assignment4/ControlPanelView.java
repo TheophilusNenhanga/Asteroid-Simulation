@@ -27,9 +27,7 @@ public class ControlPanelView extends VBox {
 		this.getChildren().addAll(label, slider, asteroidMovement, asteroidSpin);
 		this.setStyle("-fx-background-color: rgba(0, 0, 0, 0)");
 
-		slider.valueProperty().addListener(event -> {
-			controller.changeRotationVelocity(slider.getValue());
-		});
+		slider.valueProperty().addListener(event -> controller.changeRotationVelocity(slider.getValue()));
 		asteroidMovement.selectedProperty().addListener(event -> controller.toggleAsteroidMovement());
 		asteroidSpin.selectedProperty().addListener(event -> controller.toggleAsteroidRotation());
 	}

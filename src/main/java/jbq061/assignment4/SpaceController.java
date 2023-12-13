@@ -7,11 +7,13 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class SpaceController {
-	private Random random;
+	private final Random random;
 	private SpaceModel model;
 	private IModel iModel;
 
-	private PublishSubscribe publishSubscribe;
+	private double previousX, previousY;
+	private long previousTime;
+	private final PublishSubscribe publishSubscribe;
 	private MouseEvent lastMouseEvent;
 	private ScrollEvent lastScrollEvent;
 	boolean asteroidMovement, asteroidRotation;
@@ -22,6 +24,9 @@ public class SpaceController {
 		this.publishSubscribe = publishSubscribe;
 		asteroidRotation = true;
 		asteroidMovement = true;
+		this.previousTime = 0;
+		this.previousX = 0;
+		this.previousY = 0;
 	}
 
 	public void setModel(SpaceModel model) {
@@ -41,6 +46,7 @@ public class SpaceController {
 		for (int i = 0; i < 10; i++) {
 			model.createAsteroid(random.nextDouble(1), random.nextDouble(1));
 		}
+		publishSubscribe.publish("areaCursor-off");
 	}
 
 	public void moveAsteroids(Asteroid asteroid) {
@@ -59,7 +65,7 @@ public class SpaceController {
 	public void handleTimerTick() {
 
 		iModel.setWorldRotation(iModel.getWorldRotation() + iModel.getWorldRotationVelocity());
-		if (iModel.getWorldRotation() >= 2*Math.PI) iModel.setWorldRotation(0);
+		if (iModel.getWorldRotation() >= 2 * Math.PI) iModel.setWorldRotation(0);
 		// When the world gets back to its original position rest the world rotation.
 
 		for (Asteroid asteroid : model.getAsteroids()) {
@@ -68,9 +74,9 @@ public class SpaceController {
 		}
 		// System.out.println("World rotation: " + iModel.getWorldRotation() + "World Rotation Velocity: " + iModel.getWorldRotationVelocity());
 
-		if (iModel.isAreaCursorOn()){
+		if (iModel.isAreaCursorOn()) {
 			publishSubscribe.publish("areaCursor", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), lastScrollEvent, iModel.getCurrentAreaCursor());
-		}else{
+		} else {
 			publishSubscribe.publish("animate", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity());
 		}
 
@@ -95,12 +101,11 @@ public class SpaceController {
 		double rotatedMouseY = rotateY(mouseX, mouseY, -iModel.getWorldRotation());
 
 		System.out.println("unrotated: " + mouseX + " " + mouseY);
-		System.out.println("rotated: " + rotatedMouseX + " " + rotatedMouseY);
 		System.out.println(iModel.getWorldRotation());
 
 		model.getAsteroids().forEach(asteroid -> {
-			if (asteroid.contains(mouseX, mouseY)) {
-			//if (asteroid.contains(rotatedMouseX, rotatedMouseY)) { // regardless of whether I use the rotated or un-rotated values the selection is still incorrect.
+			if (asteroid.contains(rotatedMouseX, rotatedMouseY)) {
+				//if (asteroid.contains(rotatedMouseX, rotatedMouseY)) { // regardless of whether I use the rotated or un-rotated values the selection is still incorrect.
 				asteroid.setSelected(true);
 				asteroid.setzOrder(asteroid.getzOrder() + 1);
 				if (!(iModel.getSelected().contains(asteroid))) iModel.getSelected().add(asteroid);
@@ -110,11 +115,38 @@ public class SpaceController {
 		model.getAsteroids().sort(Comparator.comparingInt(Asteroid::getzOrder));
 	}
 
+
 	public void handleMouseDragged(MouseEvent event) {
+		// do velocity calculation here
+		double x = event.getX();
+		double y = event.getY();
+		long currentTime = System.currentTimeMillis();
+
+		double deltaX = x - previousX;
+		double deltaY = y - previousY;
+		long deltaT = currentTime - previousTime;
+
+		double velocityX = deltaX / deltaT;
+		double velocityY = deltaY / deltaT;
+
+		double maxVelocity = 0.001;
+		iModel.getSelected().forEach(asteroid -> {
+			asteroid.setxVelocity(Math.min(Math.abs(velocityX), maxVelocity) * Math.signum(velocityX));
+			asteroid.setyVelocity(Math.min(Math.abs(velocityY), maxVelocity) * Math.signum(velocityY));
+		});
+
+
+		iModel.getSelected().forEach(asteroid -> asteroid.setCoordinates(new double[]{asteroid.getCoordinates()[0] + deltaX / asteroid.canvasWidth, asteroid.getCoordinates()[1] + deltaY / asteroid.canvasHeight}));
+
+
+		previousX = x;
+		previousY = y;
+		previousTime = currentTime;
 
 	}
 
 	public void handleMouseReleased(MouseEvent event) {
+
 		// clear the selection when the mouse is released
 		publishSubscribe.publish("areaCursor-off");
 		iModel.setAreaCursorOn(false);
@@ -122,14 +154,48 @@ public class SpaceController {
 
 	}
 
-	public void handleWheel(ScrollEvent event){
-		if (iModel.isAreaCursorOn()){
+	public void handleWheel(ScrollEvent event) {
+		if (iModel.isAreaCursorOn()) {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			lastScrollEvent = event;
 			iModel.setCurrentAreaCursor(Math.min(Math.max(iModel.getCurrentAreaCursor() + event.getDeltaY(), iModel.getAreaCursorMin()), iModel.getAreaCursorMax()));
 			publishSubscribe.publish("areaCursor", model.getAsteroids(), model.getStars(), iModel.getWorldRotationVelocity(), event, iModel.getCurrentAreaCursor());
+			// check if there is an asteroid in the circle with origin (event.X, event.Y) and radius iModel.getCurrentAreaCursor
+			for (Asteroid asteroid : model.getAsteroids()) {
+				double asteroidX = asteroid.getCoordinates()[0], asteroidY = asteroid.getCoordinates()[1];
+				double distance = Math.sqrt(Math.pow(event.getX() - asteroidX, 2) + Math.pow(event.getY() - asteroidY, 2));
+
+				if (!(distance <= iModel.getCurrentAreaCursor())) {
+					deselectAsteroid(asteroid);
+				} else {
+					selectAsteroid(asteroid);
+					break;
+				}
+
+				for (int i = 0; i < asteroid.getXPoints().length; i++) {
+					double pointX = asteroid.getXPoints()[i] * asteroid.canvasWidth + asteroidX * asteroid.canvasWidth;
+					double pointY = asteroid.getYPoints()[i] * asteroid.canvasHeight + asteroidY * asteroid.canvasWidth;
+
+
+					double pointDistance = Math.sqrt(Math.pow(event.getX() - pointX, 2) + Math.pow(event.getY() - pointY, 2));
+					if (pointDistance <= iModel.getCurrentAreaCursor()) {
+						selectAsteroid(asteroid);
+						break;
+					}
+				}
+			}
 		}
 		// Do nothing if the user has not clicked the canvas first
+	}
+
+	private void selectAsteroid(Asteroid asteroid) {
+		iModel.getSelected().add(asteroid);
+		asteroid.setSelected(true);
+	}
+
+	private void deselectAsteroid(Asteroid asteroid) {
+		iModel.getSelected().remove(asteroid);
+		asteroid.setSelected(false);
 	}
 
 	public void changeRotationVelocity(double rotationVelocity) {
@@ -146,7 +212,6 @@ public class SpaceController {
 
 	private double rotateX(double x, double y, double radians) {
 		return (Math.cos(radians) * x - Math.sin(radians) * y);
-
 	}
 
 	private double rotateY(double x, double y, double radians) {

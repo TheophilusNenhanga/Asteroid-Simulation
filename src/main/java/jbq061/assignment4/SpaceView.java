@@ -87,8 +87,8 @@ public class SpaceView extends StackPane implements Subscriber {
 		if (areaCursor && areaCursorDimensions == null) throw new RuntimeException("area cursor dimensions expected");
 		if (areaCursor) {
 			{
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				System.out.println(Arrays.toString(areaCursorDimensions));
+//				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+//				System.out.println(Arrays.toString(areaCursorDimensions));
 				graphicsContext.setFill(Color.rgb(50, 50, 50, 0.5));
 				graphicsContext.fillOval(areaCursorDimensions[0], areaCursorDimensions[1], areaCursorDimensions[2], areaCursorDimensions[2]);
 			}

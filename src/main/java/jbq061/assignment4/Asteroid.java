@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class Asteroid {
 	private double[] coordinates;
-	private final double xVelocity;
-	private final double yVelocity;
+	private double xVelocity;
+	private double yVelocity;
 	private final double aVelocity;
 	private double angle;
 	private final double[] xPoints;
@@ -28,7 +28,7 @@ public class Asteroid {
 		this.coordinates = new double[]{normalizedX, normalizedY};
 		this.xPoints = generateAsteroidPoints()[0];
 		this.yPoints = generateAsteroidPoints()[1];
-		this.angle = random.nextInt(0, 360);
+		this.angle = random.nextDouble(0, 2 * Math.PI);
 		this.xVelocity = random.nextDouble(0.001);
 		this.yVelocity = random.nextDouble(0.001);
 		this.aVelocity = random.nextDouble(1.8);
@@ -122,5 +122,17 @@ public class Asteroid {
 
 	public void setzOrder(int zOrder) {
 		this.zOrder = zOrder;
+	}
+
+	public void setxVelocity(double xVelocity) {
+		this.xVelocity = xVelocity;
+	}
+
+	public void setyVelocity(double yVelocity) {
+		this.yVelocity = yVelocity;
+	}
+
+	public void setCoordinates(double[] coordinates) {
+		this.coordinates = coordinates;
 	}
 }
